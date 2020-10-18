@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UNadopción - Registro_Mascota</title>
+    <link rel="icon" type="png" href="img/icon.png">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/estilos.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row mx-4 my-4">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="row mt-4">
+                    <div class="col-3">
+                        <div class="text-center">
+                            <img src="../img/Logo.jpeg" alt="Logo de UNadopción" width="100" height="100">
+                        </div>
+                    </div>
+
+                    <div class="col-2"></div>
+
+                    <div class="col-7 mb-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <div class="mt-4">
+                                        <div class="btn-group-sm">
+                                            <a class="btn btn-primary">Registrar mascota</a>
+                                            <a class="btn btn-primary">Registrar usuario</a>
+                                            <a class="btn btn-primary">Buscar mascota</a>
+                                            <a class="btn btn-primary">Denuncia</a>
+                                            <a class="btn btn-primary">Cuidados</a>
+                                            <a class="btn btn-primary">Contactanos</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mr-4">
+                                    <div class="mr-4">
+                                        <div class="text-right">
+                                            <a href="" class="">Conectarse/Desconectarse</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <br>
+                <br>
+                <form>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">ID mascota: </div>
+                            <input type="number" class="form-control" id="id_mascota" placeholder="id_mascota">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Nombre: </div>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Tipo: </div>
+                            <input type="text" class="form-control" id="tipo" placeholder="tipo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Edad aproximada: </div>
+                            <input type="number" class="form-control" id="edad" placeholder="Edad">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Sexo:</div>
+                            <select class="custom-select" id="inlineFormCustomSelect" id="sexo" placeholder="Sexo">
+                                <option selected>Seleccione</option>
+                                <option value="1">Hembra</option>
+                                <option value="2">Macho</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Lugar:</div>
+                            <input type="text" class="form-control" id="lugar" placeholder="Lugar">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Comment:</div>
+                            <textarea class="form-control" rows="5" id="comment" placeholder="Comment"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+            <div class="col-md-1">
+            </div>
+
+
+            <div class="col-md-3"><!--Cargar imagen-->
+                <br><br>
+                <div class="row-md-4">
+                    <img src="img/subir-imagen.png" alt="" width="200px" class="mx-auto">
+                </div>
+                <div class="row-md-4">
+                    <button type="button" class="btn btn-success">Subir imágen</button>
+                </div>
+
+                <br><br>
+                <div class="row-md-4">
+                    <form>
+                        <div class="form-group">
+                            <label for="vacuna">Vacunas:</label>
+                            <input type="text" id="vacuna" class="form-control" placeholder="Nombre de vacuna">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row-md-4">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">LLenar Vacunas</button>
+                        <button type="button" class="btn btn-info">Subir vacunas</button>
+                    </div>
+                </div>
+
+                <br><br><br><br><br><br>
+                <div class="row">
+                    <div class="container">
+                        <button type="button" class="btn btn-danger">Terminar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous">
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous">
+</script>
+
+</body>
+</html>
