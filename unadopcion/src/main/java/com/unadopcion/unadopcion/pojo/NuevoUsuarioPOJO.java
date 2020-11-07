@@ -10,6 +10,15 @@ public class NuevoUsuarioPOJO {
     private String rol;
     private String lugar;
     private String info;
+    private String idGoogle;
+
+    public String getIdGoogle() {
+        return idGoogle;
+    }
+
+    public void setIdGoogle(String idGoogle) {
+        this.idGoogle = idGoogle;
+    }
 
     public String getNombreReal() {
         return nombreReal;

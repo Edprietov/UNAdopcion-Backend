@@ -14,6 +14,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.annotation.Documented;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -22,61 +24,54 @@ import java.net.URISyntaxException;
 public class GoogleAPIControlador {
     MiLogger miLogger = new MiLogger(GoogleAPIControlador.class);
     // componente a que se va redirigir depues de autenticacion con Google
-    private final String COMPONENTE_URL = "http://localhost:8081/inicio/";
+    private final String COMPONENTE_URL = "http://localhost:8081/";
 
     @Autowired
     private LogeoServicio logeoServicio;
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @RequestMapping(value = "/autenticar")
+    @RequestMapping(value = "/registrar-usuario")
     public ResponseEntity<Object> autenticar(@AuthenticationPrincipal OAuth2User user) throws URISyntaxException {
+        String url = COMPONENTE_URL;
+        Usuario usuario = new Usuario();
+        HttpHeaders httpHeaders = new HttpHeaders();
         // Principal que llega de Google
         String nombre = user.getAttribute("name"); // nombre del usuario
-        String sub = user.getAttribute("sub");// id de google
+        String idGoogle = user.getAttribute("sub");// id de google
         String urlFoto = user.getAttribute("picture");// foto en version URL. Puede cambiar, siempre guardar
         String correo = user.getAttribute("email");
 
-        // crear o refrescar un usuario
-        Usuario usuario = null;
-        // si usuario no existe con el goodle id entonces crear uno nuevo
-        if (!usuarioServicio.usuarioExistePorGoogleId(sub)) {
-            usuario = crearUsuarioConGoogle(sub, nombre, urlFoto, correo);
-            miLogger.info("Nuevo usuario " + usuario.getUsuarioNombreReal());
-        } else {
-            // si existe entonces refrescar los datos del usuario
-            usuario = usuarioServicio.buscarUsuarioPorGoogleId(sub);
-            usuario.setUsuarioNombreReal(nombre);// refrescar nombre en google, puede cambiar
-            usuario.setUsuarioUrlFoto(urlFoto);// refrescar foto en google, puede cambiar
-            usuarioServicio.guardar(usuario);
-            miLogger.info("Usuario existente " + usuario.getUsuarioNombreReal());
 
+        if (!usuarioServicio.usuarioExistePorGoogleId(idGoogle)) {
+            Logeo logeo = new Logeo();
+
+            logeo.setLogeoNombre(correo);
+            logeo.setLogeoContra(idGoogle);
+            logeo = logeoServicio.guardar(logeo);
+
+            usuario.setLogeoId(logeo.getLogeoId());
+            usuario.setUsuarioEmail(correo);
+            usuario.setUsuarioNombreReal(nombre);
+            usuario.setUsuarioGoogleId(idGoogle);
+            usuario.setUsuarioUrlFoto(urlFoto);
+            usuario.setUsuarioGoogleId(idGoogle);
+
+            usuario.setUsuarioNombre(nombre);
+            usuario.setUsuarioRol("f");
+            usuario.setUsuarioTelefono("123");
+
+            usuarioServicio.crearUsuario(usuario);
+            url += "registro/";
+        } else {
+            url += "logeo/";
         }
 
-        // Armar respuesta de redirecionamiento al controlador inicio en el front
-        String rawUrl = COMPONENTE_URL + sub;
-        String url = rawUrl.replaceAll(" ", "%20");// replazar espacios en url
+        url = url.replaceAll(" ", "%20");// replazar espacios en url
         URI comp = new URI(url);
-        HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(comp);
-        miLogger.info("Usuario se a logeado " + nombre + " " + sub + " " + correo + " foto " + urlFoto);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
-
+        //return new ResponseEntity<>(usuario, httpHeaders, HttpStatus.SEE_OTHER);
     }
 
-    // Metodos auxiliares
-
-    private Usuario crearUsuarioConGoogle(String googleId, String usuarioNombreReal, String urlFoto, String correo) {
-        // crear logeo primero
-        Logeo logeo = logeoServicio.crearLogeo(googleId, "sin_contrasena");
-        // crear un usuario con el id del logeo
-        Usuario usuario = usuarioServicio.googleCrearUsuario(logeo.getLogeoId(), googleId, usuarioNombreReal, urlFoto,
-                correo);
-        // poner id de usuario creado en logeo
-        logeo.setUsuarioId(usuario.getUsuarioId());
-        // guardar cambios a logeo despues de creacion
-        logeoServicio.guardar(logeo);
-
-        return usuario;
-    }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioServicio {
@@ -16,76 +15,60 @@ public class UsuarioServicio {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Transactional
-    public Usuario crearUsuario(Usuario user){
-         return usuarioRepositorio.save(user);
-    }
-
-    @Transactional
-
-    public Usuario googleCrearUsuario(int logeoId, String googleId, String usuarioNombreReal, String  urlFoto, String correo){
-        String ninguno = "";
-        Usuario usuario = new Usuario();
-        usuario.setLogeoId(logeoId);
-        usuario.setUsuarioNombre(googleId);
-        usuario.setUsuarioTelefono("0");
-        usuario.setUsuarioNombreReal(usuarioNombreReal);
-        usuario.setUsuarioGoogleId(googleId);
-        usuario.setUsuarioRol(ninguno);
-        usuario.setUsuarioPuntos(0);
-        usuario.setUsuarioEmail(correo);
-        usuario.setUsuarioUrlFoto(urlFoto);
-        usuario.setUsuarioInfo(ninguno);
-        return usuarioRepositorio.save(usuario);
-
+    public Usuario crearUsuario(Usuario user) {
+        return usuarioRepositorio.save(user);
     }
 
 
-    public void editar(Usuario user){
+    public void editar(Usuario user) {
         usuarioRepositorio.save(user);
     }
 
     @Transactional
-    public Usuario crearContacto(){
+    public Usuario crearContacto() {
         Usuario usuario = new Usuario();
         return usuarioRepositorio.save(usuario);
     }
 
-    public void guardarUsuario(Usuario usuario){
-        usuarioRepositorio.save(usuario);
+    public Usuario buscarPorLogeoId(int id){
+        return usuarioRepositorio.getFirstByLogeoId(id);
     }
-
-    public boolean existeEmail(String email){
+    public boolean existeEmail(String email) {
         return usuarioRepositorio.existsByUsuarioEmail(email);
     }
+    public Usuario buscarCorreo(String email){
+        return usuarioRepositorio.findFirstByUsuarioEmail(email);
+    }
 
-    public Usuario guardar(Usuario usuario){
+    public Usuario save(Usuario usuario) {
         return usuarioRepositorio.save(usuario);
     }
 
-    public Optional<Usuario> buscarUsuario(int id)
-    {
-        return usuarioRepositorio.findById(id);
-    }
-
-    public Usuario buscarUsuarioNombre(String nombre){
+    public Usuario buscarUsuarioNombre(String nombre) {
         return usuarioRepositorio.findByUsuarioNombreRealIsLike(nombre);
     }
 
-        public Usuario buscarUsuarioPorGoogleId(String googleId){
+    public Usuario buscarUsuarioPorGoogleId(String googleId) {
         return usuarioRepositorio.getUsuarioByUsuarioGoogleId(googleId);
     }
-    public List<Usuario> buscarUsuarios(String nombre){
-          return usuarioRepositorio.findAllByUsuarioNombreRealIsLike(nombre);
+
+    public List<Usuario> buscarUsuarios(String nombre) {
+        return usuarioRepositorio.findAllByUsuarioNombreRealIsLike(nombre);
     }
 
-
-    public boolean usuarioExiste(String nombre){
+    public boolean usuarioExiste(String nombre) {
         return usuarioRepositorio.existsByUsuarioNombre(nombre);
     }
-    public boolean usuarioExistePorGoogleId(String googleId){
+
+    public Usuario usuarioEnEdición(String rol){
+        return usuarioRepositorio.findByUsuarioRol(rol);
+    }
+
+    public boolean usuarioExistePorGoogleId(String googleId) {
         return usuarioRepositorio.existsByUsuarioGoogleId(googleId);
     }
-    public boolean usuarioIdExiste(int  usuarioId){
+
+    public boolean usuarioIdExiste(int usuarioId) {
         return usuarioRepositorio.existsByUsuarioId(usuarioId);
     }
 

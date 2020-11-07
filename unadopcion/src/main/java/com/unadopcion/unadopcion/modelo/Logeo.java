@@ -11,14 +11,21 @@ public class Logeo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int logeoId;
-    private Integer usuarioId;
     private String logeoNombre;
     private String logeoContra;
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
 
     public Logeo() {
-        usuarioId = null;
     }
 
     public int getLogeoId() {
@@ -27,14 +34,6 @@ public class Logeo {
 
     public void setLogeoId(int logeoId) {
         this.logeoId = logeoId;
-    }
-
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
     }
 
     public String getLogeoNombre() {

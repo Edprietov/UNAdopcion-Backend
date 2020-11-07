@@ -3,7 +3,7 @@ package com.unadopcion.unadopcion.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "usuario")
+@Table(name = "usuario")
 public class Usuario {
 
     @Id
@@ -20,14 +20,10 @@ public class Usuario {
     private String usuarioNombreReal;
     private String usuarioUrlFoto;
     private String usuarioGoogleId;
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] usuarioFoto;
 
 
-
-
-    public Usuario() {}
+    public Usuario() {
+    }
 
     public String getUsuarioGoogleId() {
         return usuarioGoogleId;
@@ -56,15 +52,6 @@ public class Usuario {
     public void setUsuarioNombreReal(String usuarioNombreReal) {
         this.usuarioNombreReal = usuarioNombreReal;
     }
-
-    public byte[] getUsuarioFoto() {
-        return usuarioFoto;
-    }
-
-    public void setUsuarioFoto(byte[] usuarioFoto) {
-        this.usuarioFoto = usuarioFoto;
-    }
-
 
     public int getUsuarioId() {
         return usuarioId;

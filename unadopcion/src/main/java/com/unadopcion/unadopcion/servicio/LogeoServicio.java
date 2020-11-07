@@ -26,12 +26,12 @@ public class LogeoServicio {
         return logeoRepositorio.save(logeo);
     }
 
-    public boolean existsByNombre(String nombre) {
-        return logeoRepositorio.existsByLogeoNombre(nombre);
+    public boolean existsByEmail(String email) {
+        return logeoRepositorio.existsByLogeoNombre(email);
     }
 
-    public Logeo buscarNombre(String nombre) {
-        return logeoRepositorio.findByLogeoNombre(nombre);
+    public Logeo buscarEmail(String email) {
+        return logeoRepositorio.findByLogeoNombre(email);
     }
 
     public boolean verificarContrasena(String nombre, String contrasena) {
@@ -44,4 +44,10 @@ public class LogeoServicio {
     }
 
 
+    public boolean existeLogeoToken(String token) {
+        return logeoRepositorio.existsByToken(token);
+    }
+    public Logeo buscarLogeoByToken(String token){
+        return logeoRepositorio.findFirstByToken(token);
+    }
 }
