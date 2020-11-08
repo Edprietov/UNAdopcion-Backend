@@ -29,16 +29,22 @@ public class DenunciaServicio {
 
     }
 
-    public List<Denuncia> buscarDenunciaByUser(int idUser) {
+    public List<Denuncia> findAllByUsuarioId(int idUser) {
         return denunciaRepositorio.findAllByUsuarioId(idUser);
-    }
-
-    public List<Denuncia> buscarDenunciaByAnimalId(int id) {
-        return denunciaRepositorio.findAllByAnimalId(id);
     }
 
     public Denuncia actualizar(Denuncia denuncia) {
         return denunciaRepositorio.save(denuncia);
     }
 
+    public List<Denuncia> findAllByAnimalId(int id) {
+        return denunciaRepositorio.findAllByAnimalId(id);
+    }
+
+    public List<Denuncia> findAllByDenunTipo(String tipo){
+        return denunciaRepositorio.findAllByDenunTipo(tipo);
+    }
+    public List<Denuncia> findAllByUsuarioIdAndAnimalId(int usuarioId, int animalId){
+        return denunciaRepositorio.findAllByUsuarioIdAndAnimalId(usuarioId,animalId);
+    }
 }

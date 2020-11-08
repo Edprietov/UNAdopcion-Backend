@@ -27,9 +27,34 @@ public class DenunciaControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @RequestMapping(value = "/consultar-maltrato/{id}", produces = "application/json")
-    public List<Denuncia> consultaMaltratoId(@PathVariable int id) {
-        return denunciaServicio.buscarDenunciaByAnimalId(id);
+    @RequestMapping(value = "/consultar-maltrato/", produces = "application/json")
+    public List<Denuncia> consultaMaltratoId(@RequestBody DenunciaPOJO denunciaPOJO) {
+        boolean nombre = denunciaPOJO.getUsuarioId() > 0;
+        boolean id = denunciaPOJO.getAnimalId() > 0;
+        boolean tipo = denunciaPOJO.getDenunTipo() != "";
+        //System.out.println(nombre + "-" + id + "-" + tipo);
+
+        int id_user = denunciaPOJO.getUsuarioId();
+        int id_animal = denunciaPOJO.getAnimalId();
+        String tipo_animal = denunciaPOJO.getDenunTipo();
+
+        if(nombre && id && tipo){
+            return null;
+        }else if(nombre && id){
+            return denunciaServicio.findAllByUsuarioIdAndAnimalId(id_user,id_animal);
+        }else if(nombre && tipo){
+            return null;
+        }else if(id && tipo){
+            return null;
+        }else if(id){
+            return denunciaServicio.findAllByAnimalId(id_animal);
+        }else if(tipo){
+            return denunciaServicio.findAllByDenunTipo(tipo_animal);
+        }else if(nombre){
+            return denunciaServicio.findAllByUsuarioId(id_user);
+        }else{
+            return null;
+        }
     }
 
     @RequestMapping(value = "/denunciar-maltrato", method = RequestMethod.POST)
@@ -68,7 +93,7 @@ public class DenunciaControlador {
             miLogger.info("El usuario " + " consulto los casos de maltrato del usuario "
                     + usuario_consultado.getUsuarioNombre());
         }
-        return denunciaServicio.buscarDenunciaByUser(usuario_consultado.getUsuarioId());
+        return denunciaServicio.findAllByUsuarioId(usuario_consultado.getUsuarioId());
     }
 
 }

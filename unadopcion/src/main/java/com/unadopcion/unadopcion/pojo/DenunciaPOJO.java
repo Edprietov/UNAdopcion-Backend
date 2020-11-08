@@ -3,6 +3,7 @@ package com.unadopcion.unadopcion.pojo;
 public class DenunciaPOJO {
 
     private String nombreUsuario;
+    private int usuarioId;
     private int animalId;
     private String denunTipo;
     private String denunDescrip;
@@ -10,6 +11,14 @@ public class DenunciaPOJO {
 
     public String getNombreUsuario() {
         return nombreUsuario;
+    }
+
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public void setNombreUsuario(String nombreUsuario) {

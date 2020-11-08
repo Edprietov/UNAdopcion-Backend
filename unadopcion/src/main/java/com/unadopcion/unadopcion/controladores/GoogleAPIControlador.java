@@ -32,7 +32,7 @@ public class GoogleAPIControlador {
     private UsuarioServicio usuarioServicio;
 
     @RequestMapping(value = "/registrar-usuario")
-    public ResponseEntity<Object> autenticar(@AuthenticationPrincipal OAuth2User user) throws URISyntaxException {
+    public ResponseEntity<Object> registrar(@AuthenticationPrincipal OAuth2User user) throws URISyntaxException {
         String url = COMPONENTE_URL;
         Usuario usuario = new Usuario();
         HttpHeaders httpHeaders = new HttpHeaders();
