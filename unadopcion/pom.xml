@@ -132,14 +132,14 @@
                         <goals>
                             <goal>migrate</goal>
                         </goals>
-                    </execution>
+                    </execution>s
                 </executions>
                 <configuration>
                     <!--driver>com.mysql.jdbc.Driver</driver-->
                     <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/unadopciondb?serverTimezone=UTC</url>
-                    <user>root</user>
-                    <password></password>
+                    <url>jdbc:mysql://ucnsjpxt4xkfcji5:zxlMDT0XAYBrjYjCCW3j@btm72nwntcricrzu7umx-mysql.services.clever-cloud.com:3306/btm72nwntcricrzu7umx</url>
+                    <user>ucnsjpxt4xkfcji5</user>
+                    <password>zxlMDT0XAYBrjYjCCW3j</password>
                     <baselineOnMigrate>true</baselineOnMigrate>
                     <!--schemas>public</schemas-->
                     <locations>
